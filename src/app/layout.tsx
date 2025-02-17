@@ -25,19 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const links : NavLink[] =[ 
-    {
-    label: "Suka",
-    href: "/fog"
-    },
-  ]
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-      <Navbar links={links} />
 
         <RandomGeoBackground/>
-        <Navbar links={links} />
         {children}
       </body>
     </html>

@@ -4,7 +4,8 @@ import styles from "@styles/RandomGeoBackground.module.css";
 
 
 function generateGlitchTile(): string {
-    const tileSize = 200;
+
+    const tileSize = window.innerWidth < 450 ? 80 : window.innerWidth < 600 ? 200 : 250;
     const quadrantSize = tileSize / 2;
   
     // Create the top-left quadrant canvas
@@ -127,7 +128,7 @@ export default function MorphingTiledGlitchBackground() {
         setBaseBg(newTile);
         setOverlayVisible(false);
       }, 3000); // 3 seconds transition duration
-    }, 15000); // New tile every 15 seconds
+    }, 4000); // New tile every 15 seconds
 
     return () => clearInterval(interval);
   }, []);

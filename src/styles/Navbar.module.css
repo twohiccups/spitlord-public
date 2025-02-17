@@ -1,59 +1,159 @@
-:root {
-    --tropical-indigo: #7d83ffff;
-    --electric-blue: #00e0f5ff;
-    --mantis: #74c445ff;
-    --sunglow: #ffc745ff;
-    --fandango: #bc108bff;
+/* 
+  1) A parent .wrapper (without overflow: hidden) 
+     sets the size of the circle and the positioning context.
+
+  2) A child .circleBackground (with overflow: hidden) 
+     shows the animated circle background but won’t clip the links 
+     because the links are siblings, not children.
+
+  3) A .links container (positioned identically to .circleBackground) 
+     so the links revolve around the same center, but are not clipped.
+*/
+
+/* 
+  The wrapper is a fixed square (or circle) that fits the smaller dimension
+  with a variable --radius used for link positioning. 
+*/
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: min(80vw, 80vh);
+    height: min(80vw, 80vh);
+    transform: translate(-50%, -50%);
+    /* 
+      We'll define the “radius” variable on the .wrapper 
+      so children can use it for positioning.
+    */
+    --radius: calc(min(70vw, 70vh) / 2);
 }
 
-.circle {
-    position: relative;
-    width: 300px;
-    /* Diameter of the circle */
-    height: 300px;
+/* The actual circle background that is clipped to a circle */
+.circleBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    /* Use a neon conic gradient for the spiral wave effect */
-    background: conic-gradient(from 0deg,
-            var(--tropical-indigo),
-            var(--electric-blue),
-            var(--mantis),
-            var(--sunglow),
-            var(--fandango),
-            var(--tropical-indigo));
-    margin: 50px auto;
-    /* Center the circle */
     overflow: hidden;
-    /* Animate the spiral rotation */
-    animation: spiralRotate 80s linear infinite;
-    filter: brightness(1.2);
-    /* Enhance neon brightness */
+    --angle: 45deg;
+    background: conic-gradient(from var(--angle),
+            #ff00ccbb,
+            #3333ffbb,
+            #ff00ccbb);
+    background-size: 400% 400%;
+    animation:
+        angleAnimation 30s linear infinite,
+        morphAnimation 30s ease-in-out infinite,
+        floating 6s ease-in-out infinite,
+        waterMorph 10s ease-in-out infinite;
 }
 
-@keyframes spiralRotate {
-    to {
-        transform: rotate(360deg);
-    }
+/* 
+    .links is separate from the circleBackground, 
+    so it doesn't get clipped.
+  */
+.links {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 
+       We still want the links to revolve around the center 
+       of the same bounding box 
+    */
+    pointer-events: none;
 }
 
-/* Style for each navigation link */
+/* Each link is placed around the circle’s perimeter */
 .link {
     position: absolute;
     top: 50%;
     left: 50%;
-    /* Neon text color */
-    color: var(--electric-blue);
-    font-size: 1rem;
+    color: white;
+    font-size: 2rem;
     font-weight: bold;
     text-decoration: none;
+    pointer-events: auto;
     transition: color 0.3s ease;
-    /* Add a dark background with slight opacity for readability */
-    background: rgba(0, 0, 0, 0.8);
-    padding: 4px 8px;
-    border-radius: 8px;
-    /* Neon glow effect */
-    box-shadow: 0 0 8px var(--electric-blue);
+    padding: 0.2em 0.4em;
+    background-color: black;
+    /* prevents text from clipping */
 }
 
+@media only screen and (min-width: 600px) {
+    .link {
+        font-size: 3rem;
+    }
+}
+
+
 .link:hover {
-    color: var(--sunglow);
+    color: #ffc745;
+}
+
+/* Animate the starting angle of the gradient from 45deg to 405deg */
+@keyframes angleAnimation {
+    0% {
+        --angle: 45deg;
+    }
+
+    100% {
+        --angle: 405deg;
+    }
+}
+
+/* Animate background-position for fluid gradient movement */
+@keyframes morphAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Subtle overall floating movement */
+@keyframes floating {
+    0% {
+        transform: scale(1) rotate(0deg) skew(0deg);
+    }
+
+    50% {
+        transform: scale(1.07) rotate(8deg) skew(6deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg) skew(0deg);
+    }
+}
+
+/* Water-like morph of the container’s shape via clip-path */
+@keyframes waterMorph {
+    /* 0% {
+        clip-path: circle(50% at 50% 50%);
+    }
+
+    25% {
+        clip-path: ellipse(48% 54% at 50% 50%);
+    }
+
+    50% {
+        clip-path: ellipse(52% 46% at 50% 50%);
+    }
+
+    75% {
+        clip-path: ellipse(49% 53% at 50% 50%);
+    }
+
+    100% {
+        clip-path: circle(50% at 50% 50%);
+    } */
 }
