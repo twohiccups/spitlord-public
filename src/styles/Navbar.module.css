@@ -1,0 +1,59 @@
+:root {
+    --tropical-indigo: #7d83ffff;
+    --electric-blue: #00e0f5ff;
+    --mantis: #74c445ff;
+    --sunglow: #ffc745ff;
+    --fandango: #bc108bff;
+}
+
+.circle {
+    position: relative;
+    width: 300px;
+    /* Diameter of the circle */
+    height: 300px;
+    border-radius: 50%;
+    /* Use a neon conic gradient for the spiral wave effect */
+    background: conic-gradient(from 0deg,
+            var(--tropical-indigo),
+            var(--electric-blue),
+            var(--mantis),
+            var(--sunglow),
+            var(--fandango),
+            var(--tropical-indigo));
+    margin: 50px auto;
+    /* Center the circle */
+    overflow: hidden;
+    /* Animate the spiral rotation */
+    animation: spiralRotate 80s linear infinite;
+    filter: brightness(1.2);
+    /* Enhance neon brightness */
+}
+
+@keyframes spiralRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Style for each navigation link */
+.link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Neon text color */
+    color: var(--electric-blue);
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    /* Add a dark background with slight opacity for readability */
+    background: rgba(0, 0, 0, 0.8);
+    padding: 4px 8px;
+    border-radius: 8px;
+    /* Neon glow effect */
+    box-shadow: 0 0 8px var(--electric-blue);
+}
+
+.link:hover {
+    color: var(--sunglow);
+}
