@@ -3,7 +3,10 @@ export interface NavLink {
     label: string;
 }
   
-export interface CircularNavigationProps {
+export interface NavbarProps {
     links: NavLink[];
-    radius?: number; // Optional: distance from the center
+}
+
+export interface AnnouncementProps {
+    text: string;
 }

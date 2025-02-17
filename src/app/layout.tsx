@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar, { NavLink } from "@components/Navbar";
 import RandomGeoBackground from "@components/RandomGeoBackground";
+
+import { Sigmar } from 'next/font/google';
+import { Roboto } from 'next/font/google';
+
+const sigmar = Sigmar({
+   subsets: ['latin'], 
+   variable: '--font-sigmar',
+   weight: '400',
+    display: 'swap' 
+  });
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +37,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${sigmar.variable}`}>
 
         <RandomGeoBackground/>
         {children}
