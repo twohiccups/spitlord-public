@@ -70,6 +70,7 @@ function generateGlitchTile(): string {
     // Top-right quadrant (mirror horizontally)
     fullCtx.save();
     fullCtx.translate(tileSize, 0);
+    fullCtx.rotate(random(0,360));
     fullCtx.scale(-1, 1);
     fullCtx.drawImage(quadCanvas, 0, 0);
     fullCtx.restore();
