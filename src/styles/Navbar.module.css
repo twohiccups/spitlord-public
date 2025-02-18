@@ -29,7 +29,6 @@
     animation: angleAnimation 30s linear infinite,
         morphAnimation 30s ease-in-out infinite,
         floating 6s ease-in-out infinite,
-        waterMorph 10s ease-in-out infinite,
         circleDeform 15s ease-in-out infinite;
 }
 
@@ -128,19 +127,6 @@
     }
 }
 
-@keyframes waterMorph {
-    0% {
-        filter: blur(0px);
-    }
-
-    50% {
-        filter: blur(6px);
-    }
-
-    100% {
-        filter: blur(0px);
-    }
-}
 
 @keyframes circleDeform {
     0% {

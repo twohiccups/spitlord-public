@@ -1,0 +1,163 @@
+/* Container using CSS Grid */
+.gallerySection {
+    display: flex;
+    justify-content: center;
+}
+.galleryContainer {
+    display: grid;
+    grid-gap: 1em;
+      padding: 1rem;
+    /* Default: 1 column */
+    grid-template-columns: repeat(1, 1fr);
+    width: 90%;
+}
+
+/* For screens at least 700px wide, use 2 columns */
+@media (min-width: 700px) { 
+    .galleryContainer {
+         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* For screens at least 1100px wide, use 3 columns */
+@media (min-width: 1100px) {
+    .galleryContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Each grid item */
+.galleryItem {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+
+}
+
+.galleryItem:hover {
+    transform: scale(1.01);
+}
+
+/* The wrapper sets up an aspect ratio for each image */
+.imageWrapper {
+    position: relative;
+    /* overflow: hidden; */
+    border-radius: 8px;
+}
+
+/* Create a square aspect ratio using a pseudo-element */
+.imageWrapper::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+/* The actual image is absolutely positioned to cover the wrapper */
+.imageContent {
+    position: absolute;
+    border-radius: 3px;
+    top: 0;
+    left: 0;
+    margin: auto;
+    object-fit: contain;
+}
+
+.modalImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* or cover, if you want to fill the container completely (which might crop parts of the image) */
+  margin: auto;
+}
+
+/* Modal overlay styles */
+.modalOverlay {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    position: relative;
+    width: 90%;
+    height: 90%;
+}
+
+/* Modal image container */
+.modalImageWrapper {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Existing styles ... */
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    position: relative;
+    width: 90%;
+    height: 90%;
+}
+
+/* Close button */
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 1010;
+}
+
+/* Navigation arrows */
+.prevButton,
+.nextButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+    z-index: 1010;
+    user-select: none;
+}
+
+.prevButton {
+    left: 10px;
+}
+
+.nextButton {
+    right: 10px;
+}
+
+/* Optionally, add hover/focus effects */
+.prevButton:hover,
+.nextButton:hover,
+.closeButton:hover {
+    color: #ccc;
+}

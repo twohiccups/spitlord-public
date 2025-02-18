@@ -1,5 +1,6 @@
 import Announcement from "@components/Announcement";
 import Navbar from "@components/Navbar";
+import RandomGeoBackground from "@components/RandomGeoBackground";
 import styles from "@styles/Home.module.css";
 import { NavLink } from "src/types";
 
@@ -26,6 +27,7 @@ export default function Home() {
   
   return (
     <>
+    <RandomGeoBackground/>
     <div className={styles.pageContainer}>
     <Announcement text="All thoughts are unpleasant."/>
     <Navbar links={links} />

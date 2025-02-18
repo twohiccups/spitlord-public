@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import RandomGeoBackground from "@components/RandomGeoBackground";
 
 import { Sigmar } from 'next/font/google';
 import { Roboto } from 'next/font/google';
@@ -38,8 +37,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} ${sigmar.variable}`}>
-
-        <RandomGeoBackground/>
         {children}
       </body>
     </html>
