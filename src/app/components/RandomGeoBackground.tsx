@@ -127,8 +127,8 @@ export default function MorphingTiledGlitchBackground() {
       setTimeout(() => {
         setBaseBg(newTile);
         setOverlayVisible(false);
-      }, 3000); // 3 seconds transition duration
-    }, 4000); // New tile every 15 seconds
+      }, 5000); // 3 seconds transition duration
+    }, 5000); // New tile every 15 seconds
 
     return () => clearInterval(interval);
   }, []);

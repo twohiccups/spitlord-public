@@ -2,13 +2,25 @@
 .tvBox {
     position: relative;
     width: 100%;
-    background: #000;
     border: 8px solid #333;
     border-radius: 8px;
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8),
         0 0 15px rgba(0, 0, 0, 0.7);
     overflow: hidden;
+    text-align: center;
+    align-items: center;
 }
+
+@media screen and (min-width: 600px) {
+    .tvBox {
+        width: 80%;
+        margin: auto;
+        margin-top: 0.5rem;
+
+    }
+}
+
+
 
 /* Pseudo-element for static effect overlay */
 .tvBox::before {
@@ -77,34 +89,65 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3rem;
-    background: #111;
+    padding: 1rem;
+    background: #222;
     border: 2px solid #333;
     border-radius: 8px;
     z-index: 3;
     /* Above static lines */
 }
 
+@media screen and (min-width: 400px) {
+    .glitchContainer {
+        padding: 3rem;
+    }
+}
+
+
+
 /* Base glitch text styling */
 .glitch {
-    padding: 1rem;
     position: relative;
+    z-index: 0;
+    /* Base stacking context */
+    padding: 1rem;
     background-color: black;
-    /* Note: We keep the text color white so the glitch shadows show */
     color: #fff;
     font-family: var(--font-sigmar);
-    font-size: 3rem;
+    font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     white-space: pre-wrap;
-    /* Allow text wrapping */
     animation: glitch-effect 2s infinite;
-    /* Ensure the SMPTE overlay sits on top of the text */
-    z-index: 2;
+    width: 100%;
 }
 
-/* Glitch effect keyframes */
+@media screen and (min-width: 400px) {
+    .glitch {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .glitch {
+        font-size: 3rem;
+    }
+}
+
+
+
+/* Animate the stripes from 0px → 60px, which matches the total pattern width */
+@keyframes stripesMove {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 60px 0;
+    }
+}
+
 @keyframes glitch-effect {
     0% {
         transform: none;
@@ -114,17 +157,15 @@
 
     8% {
         text-shadow: none;
-        opacity: 0.8;
     }
 
     16% {
-        text-shadow: 2px 0 blue, -2px 0 red;
+        text-shadow: 2px 0 blue, -8px 0 red;
         opacity: 1;
     }
 
     24% {
         text-shadow: none;
-        opacity: 0.9;
     }
 
     32% {
@@ -134,7 +175,6 @@
 
     40% {
         text-shadow: none;
-        opacity: 0.95;
     }
 
     100% {
@@ -142,6 +182,7 @@
         opacity: 1;
     }
 }
+
 
 /* SMPTE color bars overlay placed directly over the text */
 .smpteOverlay {

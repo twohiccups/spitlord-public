@@ -17,6 +17,4 @@ const Announcement = ({ text }: AnnouncementProps) => {
   );
 };
 
-
-
 export default Announcement;
